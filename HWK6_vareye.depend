@@ -1,0 +1,80 @@
+# depslib dependency file v1.0
+1450237604 source:c:\users\erin\workspace\hwk6_vareye\main.cpp
+	"ArithmeticExpression.h"
+	"Multiplication.h"
+	"Addition.h"
+	"Subtraction.h"
+	"Division.h"
+	<iostream>
+	<string>
+	<iomanip>
+	<cstdlib>
+	<algorithm>
+	<sstream>
+	<cmath>
+
+1450237781 source:c:\users\erin\workspace\hwk6_vareye\addition.cpp
+	"Addition.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+
+1450237781 c:\users\erin\workspace\hwk6_vareye\addition.h
+	<string>
+
+1450237615 source:c:\users\erin\workspace\hwk6_vareye\arithmeticexpression.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+	<iomanip>
+	"ArithmeticExpression.h"
+	"Multiplication.h"
+	"Addition.h"
+	"Subtraction.h"
+	"Division.h"
+
+1450237613 c:\users\erin\workspace\hwk6_vareye\arithmeticexpression.h
+	<string>
+
+1450237595 c:\users\erin\workspace\hwk6_vareye\multiplication.h
+	<string>
+
+1450237600 c:\users\erin\workspace\hwk6_vareye\subtraction.h
+	<string>
+
+1450237592 c:\users\erin\workspace\hwk6_vareye\division.h
+	<string>
+
+1450237590 source:c:\users\erin\workspace\hwk6_vareye\division.cpp
+	"Division.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+
+1450237597 source:c:\users\erin\workspace\hwk6_vareye\multiplication.cpp
+	"Multiplication.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+
+1450237602 source:c:\users\erin\workspace\hwk6_vareye\subtraction.cpp
+	"Subtraction.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+
+1450237790 source:c:\users\erin\workspace\hwk6_vareye\expression.cpp
+	"Expression.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<sstream>
+
+1450237587 c:\users\erin\workspace\hwk6_vareye\expression.h
+	<string>
+
