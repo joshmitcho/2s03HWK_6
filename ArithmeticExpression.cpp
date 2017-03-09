@@ -28,7 +28,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
     string *left; //pointer left
     string *right; //pointer right
     int bracket=0;
-    for(int i=0;i<INPUT.size();i++){ //loop
+    for(int i=0;i<INPUT.size();i++){ 
         if(INPUT.at(i)=='('){ //if left brack
             bracket++; //increment
         }
@@ -36,14 +36,14 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
 
     if(bracket!=0){//if brackets are there
         int leftbracket=0;
-        for(int i=0;i<INPUT.size();i++){ //loop
+        for(int i=0;i<INPUT.size();i++){ 
             if(INPUT.at(i)=='('){//if left bracket
                 leftbracket=i; 
             }
         }
         int rightbracket=0; 
         bool first=true;
-        for(int i=leftbracket;i<INPUT.size();i++){//loop
+        for(int i=leftbracket;i<INPUT.size();i++){
             if((INPUT.at(i)==')') && (first)){ //if true and right bracket
                 rightbracket=i;
                 first=false;
@@ -57,7 +57,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
         int a=0;
 
 
-        for(int i=0;i<temp.size();i++){//loop
+        for(int i=0;i<temp.size();i++){
             if((((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&& found){//loop if * or / and true
                 a=i;
                 found=false;
@@ -69,7 +69,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             int b=0;//setg to zero
             int length=temp.size();//grabs length
 
-            for(int i=1;i<a;i++){ //loop
+            for(int i=1;i<a;i++){ 
                 if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
                     //if symbol
                     b=i+1; 
@@ -79,7 +79,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             string A1=temp.substr(b,sizenew);//create substring
             left= &A1; //creat pointer
             bool fix=true; 
-            for(int i=a+2;i<temp.size();i++){//loop
+            for(int i=a+2;i<temp.size();i++){
                 if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&&fix){
                     //if symbol
                     length=i;
@@ -125,7 +125,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
         }
         found1=true;
         int b=0;//accumulator
-        for(int i=1;i<temp.size();i++){//loop
+        for(int i=1;i<temp.size();i++){
             if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0)) && found1){//if symbol
                 b=i;
                 found1=false; 
@@ -136,7 +136,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             int newsize=temp.size();//getting size
 
 
-            for(int i=1;i<b;i++){//loop
+            for(int i=1;i<b;i++){
                 if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
                     //if symbol
                     c=i+1; //set and add one
@@ -146,7 +146,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             string A3=temp.substr(c,sizenew1);//creat string
             left=&A3;
             bool boolean=true;
-            for(int i=b+1;i<temp.size();i++){//loop
+            for(int i=b+1;i<temp.size();i++){
                 if((temp.substr(i,1)=="+" || temp.substr(i,1)=="-" || temp.substr(i,1)=="*" || temp.substr(i,1)=="/")&&boolean){
                         //if symbol
                     newsize=i; 
@@ -190,7 +190,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
         while(!Found){//not not true
         Found=true;
         int a=0;
-        for(int i=0;i<INPUT.size();i++){//loop
+        for(int i=0;i<INPUT.size();i++){
             if((INPUT.at(i)=='*' || INPUT.at(i)=='/') && Found){//if symbol
                 a=i;
                 Found=false; //set false
@@ -200,7 +200,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             int b=0;
             int newsize=INPUT.size();
 
-            for(int i=1;i<a;i++){//loop
+            for(int i=1;i<a;i++){
                 if(INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/'){//if symbol
                     b=i+1;
                 }
@@ -211,7 +211,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             left=&A11;//pointer
 
             bool fix2=true;//while trye
-            for(int i=a+2;i<INPUT.size();i++){//loop
+            for(int i=a+2;i<INPUT.size();i++){
                 if((INPUT.at(i)=='+'|| INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&&fix2){//if symbol
                     newsize=i;
                     fix2=false;//set false
@@ -256,7 +256,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
 
         Found1=true;
         int a=0;
-        for(int i=1;i<INPUT.size();i++){//loop
+        for(int i=1;i<INPUT.size();i++){
             if((INPUT.at(i)=='+' || INPUT.at(i)=='-') && Found1){// if symbol
                 a=i;
                 Found1=false;//set false
@@ -266,7 +266,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             int b=0;//set zero
             int c=INPUT.size();// grab size
 
-            for(int i=1;i<a;i++){//loop
+            for(int i=1;i<a;i++){
                 if(INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/'){//if symbol
                     b=i+1;//add
                 }
@@ -277,7 +277,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             left=&A13;//get pointer
 
             bool fix3=true;//set true
-            for(int i=a+1;i<INPUT.size();i++){//loop
+            for(int i=a+1;i<INPUT.size();i++){
                 if((INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&& fix3){//if symbol
                     c=i;
                     fix3=false;//set false
@@ -309,7 +309,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
 
     }//end
 
-    for(int i=1; i<INPUT.size();i++){//loop
+    for(int i=1; i<INPUT.size();i++){
         if ((INPUT.substr(i,1)=="+") || (INPUT.substr(i,1)=="-") || (INPUT.substr(i,1)=="*") || (INPUT.substr(i,1)=="/") || (INPUT.substr(i,1)==")")){//check symbol
             string *equation1;//pointer
             equation1=&INPUT;//pointer
