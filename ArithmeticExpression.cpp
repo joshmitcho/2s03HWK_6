@@ -2,6 +2,7 @@
 //MacId: hurtada, vareye, monkhokf
 //Student Number: 1429437, 1400605 , 1409778
 //Description: This is the arithmatic subclass. its takes the input string and puts it through a binary search returing smaller expressions until solved
+//Commented by Josh Mitchell @joshmitcho
 #include <iostream> //include
 #include <string> //include
 #include <cstdlib> //include
