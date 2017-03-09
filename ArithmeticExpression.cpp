@@ -23,94 +23,98 @@ ArithmeticExpression::ArithmeticExpression(){//class  def
     string evaluate(string &INPUT); //eval
 }
 
-
-string ArithmeticExpression::evaluate(string &INPUT){//function def
-    string *left; //pointer left
-    string *right; //pointer right
-    int bracket=0;
+//This master function takes in a string and parses it as an arithmetic expression
+string ArithmeticExpression::evaluate(string &INPUT){
+    string *left; //pointer denoting left side of the expression
+    string *right; //pointer denoting right side of the expression
+	//number of brackets, if it becomes negative at any time, the expression has mismatched brackets
+    int bracket=0;	
     for(int i=0;i<INPUT.size();i++){ 
-        if(INPUT.at(i)=='('){ //if left brack
-            bracket++; //increment
+        if(INPUT.at(i)=='('){ //if the character inspected is a left bracket
+            bracket++;
         }
     } 
 
     if(bracket!=0){//if brackets are there
-        int leftbracket=0;
+        int leftbracket=0;	//position of left bracket
         for(int i=0;i<INPUT.size();i++){ 
-            if(INPUT.at(i)=='('){//if left bracket
+            if(INPUT.at(i)=='('){//if the character inspected is a left bracket
                 leftbracket=i; 
             }
         }
-        int rightbracket=0; 
+        int rightbracket=0; //position of right bracket
         bool first=true;
         for(int i=leftbracket;i<INPUT.size();i++){
-            if((INPUT.at(i)==')') && (first)){ //if true and right bracket
+            if((INPUT.at(i)==')') && (first)){ //if the character inspected is a right bracket
                 rightbracket=i;
                 first=false;
             } 
         }
-        int newsize = rightbracket-(leftbracket+1); //new size without set
-        string temp=INPUT.substr(leftbracket+1,newsize); //substring create
-        bool found=false;//if found will become true
+		//create new set ignoring what's already been processed
+        int newsize = rightbracket-(leftbracket+1); 
+		
+        string temp=INPUT.substr(leftbracket+1,newsize); //create a substring to store this set
+        bool found=false;
         while(!found){ //while none are found
-        found=true;
-        int a=0;
+			found=true;
+			int a=0;
+
+			for(int i=0;i<temp.size();i++){
+				//if the character inspected is a * or a /
+				if((((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&& found){
+					a=i;
+					found=false;
+				}
+			}
 
 
-        for(int i=0;i<temp.size();i++){
-            if((((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&& found){//loop if * or / and true
-                a=i;
-                found=false;
-            }
-        }
+			if(found==false){
+				int b=0;
+				int length=temp.size();//grabs length
 
+				for(int i=1;i<a;i++){ 
+					//if the character inspected is an operator (+, -, *, /)
+					if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
+						b=i+1; 
+					}
+				}
+				int sizenew= a-b;//create new size
+				string A1=temp.substr(b,sizenew);//create substring of that size
+				left= &A1; //creat pointer for the left side of the substring
+				bool fix=true; 
+				for(int i=a+2;i<temp.size();i++){
+					//if the character inspected is an operator (+, -, *, /)
+					if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&&fix){
+						length=i;
+						fix=false;
+					}
+				}
 
-        if(found==false){//if false
-            int b=0;//setg to zero
-            int length=temp.size();//grabs length
+				int size= length-(a+1);//create new size
 
-            for(int i=1;i<a;i++){ 
-                if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
-                    //if symbol
-                    b=i+1; 
-                }
-            }
-            int sizenew= a-b;//grab new size
-            string A1=temp.substr(b,sizenew);//create substring
-            left= &A1; //creat pointer
-            bool fix=true; 
-            for(int i=a+2;i<temp.size();i++){
-                if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&&fix){
-                    //if symbol
-                    length=i;
-                    fix=false;
-                }
-            }
+				string A2=temp.substr(a+1,size);//create new substring that is rightside
 
-            int size= length-(a+1);//create new size
+				right= &A2; 
 
-            string A2=temp.substr(a+1,size);//create new substring that is rightside
+				if(((temp.substr(a,1)).compare("*")==0)){//search for multiplication operator
 
-            right= &A2; 
+					//evaluate multiplication product
+					Multiplication myMultiplication;
+					string newvalue = myMultiplication.evaluate(*left, *right);
+					int Length= temp.size()-length;//create new size
+					int Length1=b-0;//grabbing size
+					temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length); //create substring
+				}
 
-            if(((temp.substr(a,1)).compare("*")==0)){//search for multiplication
-
-
-                Multiplication myMultiplication;//grab class
-                string newvalue = myMultiplication.evaluate(*left, *right);//grab at pointer
-                int Length= temp.size()-length;//grabbing size
-                int Length1=b-0;//grabbing size
-                temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length);//creating substring of left solve and right
-            }
-
-            else if(((temp.substr(a,1)).compare("/")==0)){//if division
-                Division myDivision;//creat object
-                string newvalue = myDivision.evaluate(*left, *right);//grab division
-                int Length= temp.size()-length;//get size
-                int Length1=b-0; //get size
-                temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length);//create substring
-            } if
-        }
+				else if(((temp.substr(a,1)).compare("/")==0)){//else if division operator found
+					//evaluate multiplication product
+					Division myDivision;
+					string newvalue = myDivision.evaluate(*left, *right);//grab division
+					int Length= temp.size()-length;//create new size
+					int Length1=b-0; //grabbing size
+					temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length);//create substring
+				} if
+			}
         }
         //ADDITION AND SUBSTRACTION
         bool found1=false;//second use of found
