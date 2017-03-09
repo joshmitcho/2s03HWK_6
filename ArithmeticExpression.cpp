@@ -3,22 +3,25 @@
 //Student Number: 1429437, 1400605 , 1409778
 //Description: This is the arithmatic subclass. its takes the input string and puts it through a binary search returing smaller expressions until solved
 //Commented by Josh Mitchell @joshmitcho
-#include <iostream> //include
-#include <string> //include
-#include <cstdlib> //include
-#include <sstream> //include
-#include <iomanip> //include
-#include "ArithmeticExpression.h" //set up
-#include "Multiplication.h"//set up
-#include "Addition.h" //set up
-#include "Subtraction.h" //set up
-#include "Division.h" //set up
 
-using namespace std; //name space
+//Include libraries for IO and string processing
+#include <iostream> 
+#include <string> 
+#include <cstdlib> 
+#include <sstream> 
+#include <iomanip> 
+//Include other classes necessary for proper functioning
+#include "ArithmeticExpression.h" 
+#include "Multiplication.h"
+#include "Addition.h"
+#include "Subtraction.h"
+#include "Division.h" 
+
+using namespace std;
 
 ArithmeticExpression::ArithmeticExpression(){//class  def
     string evaluate(string &INPUT); //eval
-}//end def
+}
 
 
 string ArithmeticExpression::evaluate(string &INPUT){//function def
@@ -28,24 +31,24 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
     for(int i=0;i<INPUT.size();i++){ //loop
         if(INPUT.at(i)=='('){ //if left brack
             bracket++; //increment
-        }//end if
-    } //end for
+        }
+    } 
 
     if(bracket!=0){//if brackets are there
         int leftbracket=0;//set to zero
         for(int i=0;i<INPUT.size();i++){ //loop
             if(INPUT.at(i)=='('){//if left bracket
                 leftbracket=i; //set to i
-            }//end if
-        }//end for
+            }
+        }
         int rightbracket=0; //set to zero
         bool first=true;//set to true
         for(int i=leftbracket;i<INPUT.size();i++){//loop
             if((INPUT.at(i)==')') && (first)){ //if true and right bracket
                 rightbracket=i;//set to i
                 first=false;//set to false
-            } //end if
-        }//end for
+            } 
+        }
         int newsize = rightbracket-(leftbracket+1); //new size without set
         string temp=INPUT.substr(leftbracket+1,newsize); //substring create
         bool found=false;//if found will become true
@@ -58,8 +61,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             if((((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&& found){//loop if * or / and true
                 a=i;//set to i
                 found=false;//set to false
-            }//end if
-        }//end loop
+            }
+        }
 
 
         if(found==false){//if false
@@ -70,8 +73,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
                     //if symbol
                     b=i+1; //set to index
-                }//end if
-            }//end loop
+                }
+            }
             int sizenew= a-b;//grab new size
             string A1=temp.substr(b,sizenew);//create substring
             left= &A1; //creat pointer
@@ -81,8 +84,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                     //if symbol
                     length=i;//set to i
                     fix=false;//set to false
-                }//end if
-            }//end for
+                }
+            }
 
             int size= length-(a+1);//create new size
 
@@ -98,7 +101,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int Length= temp.size()-length;//grabbing size
                 int Length1=b-0;//grabbing size
                 temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length);//creating substring of left solve and right
-            }//end if
+            }
 
             else if(((temp.substr(a,1)).compare("/")==0)){//if division
                 Division myDivision;//creat object
@@ -106,9 +109,9 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int Length= temp.size()-length;//get size
                 int Length1=b-0; //get size
                 temp=temp.substr(0,Length1)+newvalue+temp.substr(length,Length);//create substring
-            }//end else if
-        }//end while
-        }//end while
+            } if
+        }
+        }
         //ADDITION AND SUBSTRACTION
         bool found1=false;//second use of found
 
@@ -126,8 +129,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0)) && found1){//if symbol
                 b=i;//set to i
                 found1=false; //set to false
-            }//end if
-        }//end for
+            }
+        }
         if(found1==false){ //if false
             int c=0;//set to zero
             int newsize=temp.size();//getting size
@@ -137,8 +140,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
                     //if symbol
                     c=i+1; //set and add one
-                } //end if
-            }//end for
+                } 
+            }
             int sizenew1=b-c;
             string A3=temp.substr(c,sizenew1);//creat string
             left=&A3;//set to left
@@ -148,8 +151,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                         //if symbol
                     newsize=i; //set to i
                     boolean=false;//set to false
-                }//end if
-            }//end for
+                }
+            }
 
 
             int newlength=newsize-(b+1);//get size
@@ -162,7 +165,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int sizes= c-0;//get size
                 int size1=temp.size()-newsize;//get size
                 temp=temp.substr(0,sizes)+newvalue1+temp.substr(newsize,size1);//create string
-            }//end if
+            }
 
             else if(temp.substr(b,1)=="-"){ //else if minue
                 Subtraction mySubtraction; //create item of class
@@ -170,15 +173,15 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int sizes= c-0;//get size
                 int size1=temp.size()-newsize;//get size
                 temp=temp.substr(0,sizes)+newvalue1+temp.substr(newsize,size1);// substring of remainder of expression
-            }//end else if
+            } if
 
-        }//end loop
+        }
 
-        }//end loop
+        }
         int Lengthleft= leftbracket-0;//set to value
         int Lengthright=INPUT.size()-(rightbracket+1);//set to value
         INPUT=INPUT.substr(0,Lengthleft)+temp+INPUT.substr(rightbracket+1,Lengthright);//create new smaller strring
-    }//end if
+    }
 
 
 
@@ -191,8 +194,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             if((INPUT.at(i)=='*' || INPUT.at(i)=='/') && Found){//if symbol
                 a=i;//set to i
                 Found=false; //set false
-            }//end if
-        }//end for
+            }
+        }
         if(Found==false){ //if no mult or div
             int b=0;
             int newsize=INPUT.size();
@@ -200,8 +203,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             for(int i=1;i<a;i++){//loop
                 if(INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/'){//if symbol
                     b=i+1;//set to value
-                }//end if
-            }//end for
+                }
+            }
             int lens=a-b;//size
 
             string A11=INPUT.substr(b,lens);//string with size
@@ -212,8 +215,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 if((INPUT.at(i)=='+'|| INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&&fix2){//if symbol
                     newsize=i;//set to i
                     fix2=false;//set false
-                }//end if
-            }//end for
+                }
+            }
             int lenss=newsize-(a+1);//size
 
             string A22=INPUT.substr(a+1,lenss);//substring
@@ -225,7 +228,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int len1=b-0;//get size
                 int len2=INPUT.size()-newsize;//get size
                 INPUT=INPUT.substr(0,len1)+Newvalue+INPUT.substr(newsize,len2);//create string
-            }//end if
+            }
 
             else if(INPUT.at(a)=='/'){//if division
                 Division myDivision;//creat object
@@ -233,7 +236,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int len1=b-0;//size
                 int len2=INPUT.size()-newsize;//size
                 INPUT=INPUT.substr(0,len1)+Newvalue+INPUT.substr(newsize,len2);//substring
-            }//end else if
+            } if
 
 
         }//end
@@ -257,7 +260,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             if((INPUT.at(i)=='+' || INPUT.at(i)=='-') && Found1){// if symbol
                 a=i;//set to i
                 Found1=false;//set false
-            }//end if
+            }
         }// for
         if(Found1==false){// if false
             int b=0;//set zero
@@ -266,8 +269,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             for(int i=1;i<a;i++){//loop
                 if(INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/'){//if symbol
                     b=i+1;//add
-                }//end if
-            }//end for
+                }
+            }
 
             int lengthh=a-b;//get size
             string A13=INPUT.substr(b,lengthh);//get string
@@ -278,8 +281,8 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 if((INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&& fix3){//if symbol
                     c=i;//set to i
                     fix3=false;//set false
-                }//end if
-            }//end for
+                }
+            }
             int llen=c-(a+1);//get size
             string A14=INPUT.substr(a+1,llen);//get string
             right =&A14;//pointer
@@ -290,7 +293,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int len1=b-0;//get size
                 int len2=INPUT.size()-c; //get size
                 INPUT=INPUT.substr(0,len1)+value+INPUT.substr(c,len2);//get string
-            }//end if
+            }
 
             else if(INPUT.at(a)=='-'){//else if sub
                 Subtraction mySubtraction;//object
@@ -298,7 +301,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 int len1=b-0;//size
                 int len2=INPUT.size()-c;//size
                 INPUT=INPUT.substr(0,len1)+value+INPUT.substr(c,len2);//string
-            }//end else
+            }
 
 
         }//end
@@ -315,9 +318,9 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             equation1=NULL;
             delete equation1;
 
-        }//end if
+        }
 
-    }//end for
+    }
     if(INPUT=="-0" && INPUT.size()==2){
         INPUT="0";
     }
