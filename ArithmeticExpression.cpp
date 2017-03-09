@@ -27,7 +27,7 @@ ArithmeticExpression::ArithmeticExpression(){//class  def
 string ArithmeticExpression::evaluate(string &INPUT){//function def
     string *left; //pointer left
     string *right; //pointer right
-    int bracket=0; // set bracket to zero
+    int bracket=0;
     for(int i=0;i<INPUT.size();i++){ //loop
         if(INPUT.at(i)=='('){ //if left brack
             bracket++; //increment
@@ -35,32 +35,32 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
     } 
 
     if(bracket!=0){//if brackets are there
-        int leftbracket=0;//set to zero
+        int leftbracket=0;
         for(int i=0;i<INPUT.size();i++){ //loop
             if(INPUT.at(i)=='('){//if left bracket
-                leftbracket=i; //set to i
+                leftbracket=i; 
             }
         }
-        int rightbracket=0; //set to zero
-        bool first=true;//set to true
+        int rightbracket=0; 
+        bool first=true;
         for(int i=leftbracket;i<INPUT.size();i++){//loop
             if((INPUT.at(i)==')') && (first)){ //if true and right bracket
-                rightbracket=i;//set to i
-                first=false;//set to false
+                rightbracket=i;
+                first=false;
             } 
         }
         int newsize = rightbracket-(leftbracket+1); //new size without set
         string temp=INPUT.substr(leftbracket+1,newsize); //substring create
         bool found=false;//if found will become true
         while(!found){ //while none are found
-        found=true;//set to true
-        int a=0;//set to zero
+        found=true;
+        int a=0;
 
 
         for(int i=0;i<temp.size();i++){//loop
             if((((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&& found){//loop if * or / and true
-                a=i;//set to i
-                found=false;//set to false
+                a=i;
+                found=false;
             }
         }
 
@@ -72,18 +72,18 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             for(int i=1;i<a;i++){ //loop
                 if(((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0)){
                     //if symbol
-                    b=i+1; //set to index
+                    b=i+1; 
                 }
             }
             int sizenew= a-b;//grab new size
             string A1=temp.substr(b,sizenew);//create substring
             left= &A1; //creat pointer
-            bool fix=true; //set to true
+            bool fix=true; 
             for(int i=a+2;i<temp.size();i++){//loop
                 if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0) || ((temp.substr(i,1)).compare("*")==0) || ((temp.substr(i,1)).compare("/")==0))&&fix){
                     //if symbol
-                    length=i;//set to i
-                    fix=false;//set to false
+                    length=i;
+                    fix=false;
                 }
             }
 
@@ -91,7 +91,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
 
             string A2=temp.substr(a+1,size);//create new substring that is rightside
 
-            right= &A2; //set to pointer
+            right= &A2; 
 
             if(((temp.substr(a,1)).compare("*")==0)){//search for multiplication
 
@@ -123,16 +123,16 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
                 }
             }
         }
-        found1=true;//set to true
+        found1=true;
         int b=0;//accumulator
         for(int i=1;i<temp.size();i++){//loop
             if((((temp.substr(i,1)).compare("+")==0) || ((temp.substr(i,1)).compare("-")==0)) && found1){//if symbol
-                b=i;//set to i
-                found1=false; //set to false
+                b=i;
+                found1=false; 
             }
         }
         if(found1==false){ //if false
-            int c=0;//set to zero
+            int c=0;
             int newsize=temp.size();//getting size
 
 
@@ -144,13 +144,13 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             }
             int sizenew1=b-c;
             string A3=temp.substr(c,sizenew1);//creat string
-            left=&A3;//set to left
-            bool boolean=true;//set to true
+            left=&A3;
+            bool boolean=true;
             for(int i=b+1;i<temp.size();i++){//loop
                 if((temp.substr(i,1)=="+" || temp.substr(i,1)=="-" || temp.substr(i,1)=="*" || temp.substr(i,1)=="/")&&boolean){
                         //if symbol
-                    newsize=i; //set to i
-                    boolean=false;//set to false
+                    newsize=i; 
+                    boolean=false;
                 }
             }
 
@@ -178,21 +178,21 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
         }
 
         }
-        int Lengthleft= leftbracket-0;//set to value
-        int Lengthright=INPUT.size()-(rightbracket+1);//set to value
+        int Lengthleft= leftbracket-0;
+        int Lengthright=INPUT.size()-(rightbracket+1);
         INPUT=INPUT.substr(0,Lengthleft)+temp+INPUT.substr(rightbracket+1,Lengthright);//create new smaller strring
     }
 
 
 
     else{//if there is no more brackets
-        bool Found=false;//set to false
+        bool Found=false;
         while(!Found){//not not true
-        Found=true;//set to true
-        int a=0;//set to zero
+        Found=true;
+        int a=0;
         for(int i=0;i<INPUT.size();i++){//loop
             if((INPUT.at(i)=='*' || INPUT.at(i)=='/') && Found){//if symbol
-                a=i;//set to i
+                a=i;
                 Found=false; //set false
             }
         }
@@ -202,7 +202,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
 
             for(int i=1;i<a;i++){//loop
                 if(INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/'){//if symbol
-                    b=i+1;//set to value
+                    b=i+1;
                 }
             }
             int lens=a-b;//size
@@ -213,7 +213,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             bool fix2=true;//while trye
             for(int i=a+2;i<INPUT.size();i++){//loop
                 if((INPUT.at(i)=='+'|| INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&&fix2){//if symbol
-                    newsize=i;//set to i
+                    newsize=i;
                     fix2=false;//set false
                 }
             }
@@ -254,11 +254,11 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
         }
 
 
-        Found1=true;//set to true
-        int a=0;//set to zero
+        Found1=true;
+        int a=0;
         for(int i=1;i<INPUT.size();i++){//loop
             if((INPUT.at(i)=='+' || INPUT.at(i)=='-') && Found1){// if symbol
-                a=i;//set to i
+                a=i;
                 Found1=false;//set false
             }
         }// for
@@ -279,7 +279,7 @@ string ArithmeticExpression::evaluate(string &INPUT){//function def
             bool fix3=true;//set true
             for(int i=a+1;i<INPUT.size();i++){//loop
                 if((INPUT.at(i)=='+' || INPUT.at(i)=='-' || INPUT.at(i)=='*' || INPUT.at(i)=='/')&& fix3){//if symbol
-                    c=i;//set to i
+                    c=i;
                     fix3=false;//set false
                 }
             }
